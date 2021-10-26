@@ -7,7 +7,7 @@ The Stylelint message formatter for live-alert-bp
 
 ###  Install
 ```shell
-npm i  --save-dev
+npm i live-alert-bp-formatter-stylelint --save-dev
 ```
 
 ###  Usage
