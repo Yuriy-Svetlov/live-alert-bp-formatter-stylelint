@@ -1,6 +1,6 @@
 {
   "name": "live-alert-bp-formatter-stylelint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Stylelint message formatter for live-alert-bp",
   "main": "index.js",
   "scripts": {

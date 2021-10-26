@@ -4,22 +4,24 @@ var
 merge = require('lodash.merge'),
 path = require('path');
 
-module.exports = (errors, user_style = {}, filter = []) => {
+module.exports = (errors, options = {}) => {
 
   const 
-  formatted_messages = [];
+    formatted_messages = [];
 
   let 
-  file,
-  css,
-  style,
-  label_style,
-  label_message,
-  level_message;
+    file,
+    css,
+    style,
+    label_style,
+    label_message,
+    level_message;
 
-  style = getStyle(user_style);
+  options = optionsDefault(options);
+
+  style = options.style;
   errors = getErrorInfo(errors);
-  
+
   errors.forEach(function(item){
     level_message = (item.rule === 'CssSyntaxError') ? 'Error' : 'Warning';
 
@@ -37,12 +39,11 @@ module.exports = (errors, user_style = {}, filter = []) => {
     if (item.css != undefined){
       css = showSourceCode(item.css, item.line, item.column);
     }
-     
 
     formatted_messages.push({ 
       label: { 
         style: label_style, 
-        name: label_message 
+        name: label_message
       }, 
       message: 
         html_template('', file, style.file) 
@@ -57,7 +58,7 @@ module.exports = (errors, user_style = {}, filter = []) => {
         +
         html_rule('Rule:', item.rule, style.rule)        																
       });
-  }); 
+  });
   
   return formatted_messages;
 }
@@ -78,7 +79,18 @@ function html_template(field = '', message, style){
 
 
 function html_rule(field = '', rule, style){
-  const href = 'https://stylelint.io/user-guide/rules/' + rule;
+
+  let 
+    urlRule = '';
+
+  if(isScssRule(rule)){
+    urlRule = 'https://github.com/stylelint-scss/stylelint-scss/blob/master/src/rules/' + rule.slice(5) + '/README.md';
+  }else{
+    urlRule = 'https://stylelint.io/user-guide/rules/' + rule;
+  }
+
+  const
+    href = urlRule;
 
   if(rule == undefined){
     return '';
@@ -90,6 +102,11 @@ function html_rule(field = '', rule, style){
             '</span>';
   }else{
     return '';
+  }
+
+
+  function isScssRule(str){
+      return /^scss\/.+$/.test(str);
   }
 }
 
@@ -105,46 +122,48 @@ function includesIn(filter, level_message){
 }
 
 
-function getStyle(user_style){	
+function optionsDefault(options){  
   const
-  style_default = {};	
+    optionsDefault = {};
 
-  style_default.label = {
+  optionsDefault.style = {}; 
+  optionsDefault.filter = [];
+
+  optionsDefault.style.label = {
     error: { backgroundColor: '#ff0000', color: '#ffffff' },
     warning: { backgroundColor: 'yellow', color: '#000000' },
     info: { backgroundColor: '#90ee90', color: '#000000' }
   };
 
-  style_default.file = 'color: #ffffff !important; text-decoration: underline !important;';
+  optionsDefault.style.file = 'color: #ffffff !important; text-decoration: underline !important;';
 
-  style_default.line = {
+  optionsDefault.style.line = {
     field: 'color: #aaaaaa !important; padding-left: 7px !important;', 
     message: 'color: #ffffff !important; padding-left: 3px !important;'
   };
 
-  style_default.column = {
+  optionsDefault.style.column = {
     field: 'color: #aaaaaa !important; padding-left: 7px !important;', 
     message: 'color: #ffffff !important; padding-left: 3px !important;'
   };
 
-  style_default.evidence = {
+  optionsDefault.style.evidence = {
     field: 'color: #aaaaaa !important; display: block !important; padding-bottom: 8px !important;', 
     message: 'box-sizing: border-box !important; width: 100% !important; overflow-x: auto !important; color: #ffffff !important; display: inline-block !important; border: dashed 1px #b9b9b9 !important; padding: 20px !important;'
   };
 
-  style_default.reason = {
+  optionsDefault.style.reason = {
     field: 'color: #aaaaaa !important; display: block !important;  padding-top: 3px !important;', 
     message: 'color: #ffffff !important;'
-  };	
+  };  
 
-  style_default.rule = {
+  optionsDefault.style.rule = {
     field: 'color: #aaaaaa !important; display: block !important;  padding-top: 3px !important;', 
     message: 'color: #ffffff !important;',
     link: 'color: #beb6ff !important;'
   };
 
-  // Setting the user's style, if any	
-  return merge(style_default, user_style);
+  return merge(optionsDefault, options);
 }
 
 
