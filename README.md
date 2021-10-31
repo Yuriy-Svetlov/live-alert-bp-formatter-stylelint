@@ -32,10 +32,12 @@ formatterStylelint(messages, user_style)
 
 #### messages
 * Type: `Array`
+
 Stylelint messages
 
 #### user_style
 * Type: `ObjectJSON`
+
 Set custom style messages
 
 Exmaple:
