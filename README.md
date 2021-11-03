@@ -11,8 +11,10 @@ npm i live-alert-bp-formatter-stylelint --save-dev
 ## How to use
 
 ```javascript
+  const formatterStylelint = require("live-alert-bp-formatter-stylelint");
+
   liveAlert.open(
-    liveAlertFormatterStylelint(MessagesStylelint)
+    formatterStylelint(MessagesStylelint)
   );
 ```
 
