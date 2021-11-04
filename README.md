@@ -1,6 +1,6 @@
 # Live Alert BP Formatter Stylelint
 
-The Stylelint message formatter for [live-alert-bp](https://github.com/semiromid/live-alert-bp)
+The Stylelint message formatter for [live-alert-bp](https://github.com/Yuriy-Svetlov/live-alert-bp)
 
 
 ##  Install
@@ -20,7 +20,7 @@ npm i live-alert-bp-formatter-stylelint --save-dev
 
 ## Examples how to use
 
-[Examples](https://github.com/semiromid/live-alert-bp#examples)
+[Examples](https://github.com/Yuriy-Svetlov/live-alert-bp#examples)
 
 ## API
 
@@ -30,7 +30,7 @@ const formatterStylelint = require("live-alert-bp-formatter-stylelint");
 formatterStylelint(messages, user_style)
 ```
 
-* return:  formatted messages for [live-alert-bp](https://github.com/semiromid/live-alert-bp)
+* return:  formatted messages for [live-alert-bp](https://github.com/Yuriy-Svetlov/live-alert-bp)
 
 #### messages
 * Type: `Array`

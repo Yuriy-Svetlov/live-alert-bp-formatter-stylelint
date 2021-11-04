@@ -1,6 +1,6 @@
 {
   "name": "live-alert-bp-formatter-stylelint",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The Stylelint message formatter for live-alert-bp",
   "main": "index.js",
   "scripts": {
@@ -14,14 +14,14 @@
     "formatter",
     "stylelint"
   ],
-  "author": "Somin Yuri",
+  "author": "Yuriy Svetlov",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/semiromid/live-alert-bp-formatter-stylelint"
+    "url": "https://github.com/Yuriy-Svetlov/live-alert-bp-formatter-stylelint"
   },
   "homepage": "https://live-alert-browser-page.com",
-  "bugs": "https://github.com/semiromid/live-alert-bp-formatter-stylelint/issues",
+  "bugs": "https://github.com/Yuriy-Svetlov/live-alert-bp-formatter-stylelint/issues",
   "dependencies": {
     "lodash.merge": "^4.6.2"
   }
